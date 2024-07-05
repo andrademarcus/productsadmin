@@ -1,0 +1,71 @@
+<div class="list row">
+
+  <div class="col-12">
+  <h4>Products List</h4>
+  <hr /><br />
+  </div>
+
+  <div class="col-12">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name"
+        [(ngModel)]="name"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchName()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <th></th>
+        <th><a (click)="sort('id')" class="btn btn-link">Id</a></th>
+        <th><a (click)="sort('name')" class="btn btn-link">Name</a></th>
+        <th><a (click)="sort('description')" class="btn btn-link">Description</a></th>
+        <th><a (click)="sort('price')" class="btn btn-link">Price</a></th>
+        <th><a (click)="sort('categoryPath')" class="btn btn-link">Category Path</a></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            <button type="button" class="btn btn-primary btn-sm" (click)="editProduct(product.id)">Edit</button>
+          </td>
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.categoryPath }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+
+    <div class="row">
+    <div class="col-6">
+      Total of records: {{paging?.totalElements}}<br />
+      Current page: {{currentPage + 1}}<br />
+    </div>
+    <div class="col-6 text-right">
+      
+      <button class="btn btn-link disabled" *ngIf="paging?.first == true" >Previous</button>
+      <button class="btn btn-link" *ngIf="paging?.first == false" (click)="previousPage()" >Previous</button>
+
+      <button class="btn btn-link disabled" *ngIf="paging?.last == true" >Next</button>
+      <button class="btn btn-link" *ngIf="paging?.last == false" (click)="nextPage()" >Next</button>
+
+    </div>
+  </div>
+   
+
+  </div>
+</div>
